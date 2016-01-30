@@ -54,7 +54,6 @@
     .btn:hover
     {
         color: white;
-
     }
   </style>
 </head>
@@ -77,36 +76,38 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 </script>
-<div class="center-block">
-  <h1 class="signInText">Sign in</h1>
-  <h4 class="withText">with</h4>
-  <% if current_user %>
-      <li>Signed in as: <%= current_user.name %> -
+    <div class="center-block" id="sign_in_block">
+      <h1 class="signInText">Sign in</h1>
+      <h4 class="withText">with</h4>
+      <% if current_user %>
+          <li>Signed in as: <%= current_user.name %> -
 
-      </li>
-      <li><%= link_to "Sign out", 'sign_out', method: :delete %></li>
+          </li>
+          <li><%= link_to "Sign out", 'sign_out', method: :delete %></li>
 
-  <% else %>
-      <%= current_user %>
-      <li class="btn btn-social btn-facebook">
-        <%= link_to "auth/facebook" do %>
-            <span class="fa fa-facebook"></span>Facebook
-        <% end %>
-      </li>
-      <li class="btn btn-social btn-google">
-        <span class="fa fa-google"></span>Google
-      </li>
-      <li class="btn btn-social btn-twitter">
-        <%= link_to "auth/twitter" do %>
-            <span class="fa fa-twitter"></span>Twitter
-        <% end %>
-      </li>
-      <li class="btn btn-social btn-vk">
-        <span class="fa fa-vk"></span>VK
-      </li>
-  <% end %>
+      <% else %>
+          <%= current_user %>
+           
+          <li class="btn btn-social btn-facebook">
+            <%= link_to "auth/facebook" do %>
+                <span class="fa fa-facebook"></span>Facebook
+              <% end %>
+          </li>
+        
+          <li class="btn btn-social btn-google">
+            <span class="fa fa-google"></span>Google
+          </li>
+          <li class="btn btn-social btn-twitter">
+            <%= link_to "auth/twitter" do %>
+                <span class="fa fa-twitter"></span>Twitter
+            <% end %>
+          </li>
+          <li class="btn btn-social btn-vk">
+            <span class="fa fa-vk"></span>VK
+          </li>
+      <% end %>
 
-</div>
+    </div>
 
 
 <%= yield %>
