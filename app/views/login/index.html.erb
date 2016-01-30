@@ -1,7 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AuctionPlatform</title>
 
-<style type="text/css">
-    body{
-        background-color: #dddddd;
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <% stylesheet_link_tag 'bootstrap-social', media: 'all' %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <style type="text/css">
+    body {
+      background-color: #dddddd;
     }
 
     .center-block {
@@ -29,37 +39,77 @@
         text-align: center;
     }
 
-    .withText{
-        display: block;
-        width: 100%;
-        text-align: center;
+    .withText {
+      display: block;
+      width: 100%;
+      text-align: center;
     }
 
-    .btn{
-        width: 60%;
-        margin-left: 20%;
-        margin-top: 15px;
+    .btn {
+      width: 60%;
+      margin-left: 20%;
+      margin-top: 15px;
     }
 
     .btn:hover
     {
         color: white;
-    }
-</style>
 
-<div id ="sign_in_block" class="center-block">
-    <h1 class="signInText">Sign in</h1>
-    <h4 class="withText">with</h4>
-    <a class="btn btn-social btn-facebook">
-        <span class="fa fa-facebook"></span>Facebook
-    </a>
-    <a class="btn btn-social btn-google">
+    }
+  </style>
+</head>
+<body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '974052585963373',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+
+  (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+<div class="center-block">
+  <h1 class="signInText">Sign in</h1>
+  <h4 class="withText">with</h4>
+  <% if current_user %>
+      <li>Signed in as: <%= current_user.name %> -
+
+      </li>
+      <li><%= link_to "Sign out", 'sign_out', method: :delete %></li>
+
+  <% else %>
+      <%= current_user %>
+      <li class="btn btn-social btn-facebook">
+        <%= link_to "auth/facebook" do %>
+            <span class="fa fa-facebook"></span>Facebook
+        <% end %>
+      </li>
+      <li class="btn btn-social btn-google">
         <span class="fa fa-google"></span>Google
-    </a>
-    <a class="btn btn-social btn-twitter">
-        <span class="fa fa-twitter"></span>Twitter
-    </a>
-    <a class="btn btn-social btn-vk">
+      </li>
+      <li class="btn btn-social btn-twitter">
+        <%= link_to "auth/twitter" do %>
+            <span class="fa fa-twitter"></span>Twitter
+        <% end %>
+      </li>
+      <li class="btn btn-social btn-vk">
         <span class="fa fa-vk"></span>VK
-    </a>
+      </li>
+  <% end %>
+
 </div>
+
+
+<%= yield %>
+
+</body>
+</html>
