@@ -17,12 +17,21 @@ module AuctionPlatform
     # config.time_zone = 'Central Time (US & Canada)'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    # config.i18n.default_locale = :de
+    # config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
+    # config.i18n.default_locale = :en
 
     config.assets.paths << Rails.root.join("vendor/bootstrap-3.3.6-dist")
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    I18n.config.available_locales = :uk
+
+    # где библиотека I18n должна искать наши переводы
+    I18n.load_path += Dir[Rails.root.join('lib', 'locale', '*.{rb,yml}')]
+ 
+    # устанавливаем локаль по умолчанию на что-либо другое, чем :en
+    I18n.default_locale = :uk
+
   end
 end

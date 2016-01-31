@@ -4,4 +4,8 @@ class FeedController < ApplicationController
  		render 'feed'
   	end
 
+  	def upload
+  		render 'feed'
+  	end
+
 end

@@ -1,1 +1,212 @@
-<h1>Feed</h1>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AuctionPlatform</title>
+
+	<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= csrf_meta_tags %>
+	<% stylesheet_link_tag 'bootstrap-social', media: 'all' %>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+
+	<style type="text/css">
+		body {
+			background-color: #dddddd;
+		}
+
+		#upload{
+			background-color: #f5a623;
+			color: white;
+			border: none;
+			line-height: 10px;
+			font-size: 11px;
+		}
+
+		#upload:hover{
+			background-color: #ff8a00;
+		}
+
+		.badge{
+			background-color: #ed1c24;
+		}
+
+		#teashers:hover, #students:hover, #logout:hover{
+			background-color: #dddddd;
+		}
+
+		.dropdown-menu{
+			border-top: none;
+			border-radius: 0;
+			background-color: #f8f8f8;
+		}
+
+		@media (min-width: 768px){
+			#searchBox{
+				width: 120px;
+			}
+
+			#students:hover #drStudents{
+				display: block;
+			}
+
+			#teashers:hover #drTeachers{
+				display: block;
+			}
+			#mobileT{
+				display: none;
+			}
+
+			#mobileS{
+				display: none;
+			}
+			.photos:first-child{
+				margin-top: 100px;
+			}
+			.photos{
+				margin-top: 45px;
+			}
+			.photos:last-child{
+				margin-bottom: 45px;
+			}
+			
+
+			
+		}
+
+		@media (max-width: 768px){
+			#teashers:hover, #students:hover{
+				background-color: #eeeeee;
+			}
+			#mobileT, #mobileS{
+				display: block;
+				margin-left: 30px;
+				margin-right: 30px;
+				border-bottom: none;
+				padding-bottom: 1px;
+			}
+			.drliM a{
+				color: #898989;
+			}
+
+			#jj:hover{
+				background-color: #dddddd;
+			}			
+		}
+
+		
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+					</button>
+						<a class="navbar-brand" href="#"><%= t('auction')%>'16</a>
+					</div>
+
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="max-height: 540px;">
+						<ul class="nav navbar-nav">
+							<li id="teashers">
+								<a href="#"><%= t('hello')%>  <span class="badge">67</span></a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" id="drTeachers">
+									<li class="drli" id="jj"><a tabindex="-1" href="#"><%= t('men')%></a></li>
+									<li class="drli"><a tabindex="-1" href="#"><%= t('women')%></a></li>
+								</ul>
+								<ul class="nav nav-tabs nav-stacked" id="mobileT">
+									<li class="drliM"><a tabindex="-1" href="#"><%= t('men')%></a></li>
+									<li class="drliM"><a tabindex="-1" href="#"><%= t('women')%></a></li>
+								</ul>
+							</li>
+							<li id="students">
+								<a href="#"><%= t('students')%>  <span class="badge">78</span></a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" id="drStudents">
+									<li class="drli"><a tabindex="-1" href="#"><%= t('boys')%></a></li>
+									<li class="drli"><a tabindex="-1" href="#"><%= t('girls')%></a></li>
+								</ul>
+								<ul class="nav nav-tabs nav-stacked" id="mobileS">
+									<li class="drliM"><a tabindex="-1" href="#"><%= t('boys')%></a></li>
+									<li class="drliM"><a tabindex="-1" href="#"><%= t('girls')%></a></li>
+								</ul>
+							</li>
+						</ul>
+
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="#" id="upload"><span class="glyphicon glyphicon-cloud-upload" style="margin-left: 10px; margin-top: -10px;"></span></br><%= t('upload')%></a></li>
+							<li><a href="#" id="logout"><%= t('log_out')%></a></li>
+							<li>
+								<li>
+									<form class="navbar-form navbar-right" role="search" style="margin-left: 10px; margin-right: 25px;">
+										<div class="form-group">
+											<input type="text" class="form-control" placeholder="<%= t('search')%>" id="searchBox">
+										</div> 
+										<button type="submit" class="btn btn-default">
+											<%= t('go')%>
+										</button>
+									</form>
+								</li>
+							</ul>
+
+						</div>
+
+					</nav>
+				</div>
+			</div>
+			
+		</div>
+
+		<div class="container-fluid center-block" style="width: 70%">
+			<div class="row photos">
+				<div class="col-md-4">
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px" />
+				</div>
+				<div class="col-md-4">
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
+				</div>
+				<div class="col-md-4">
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
+				</div>
+			</div>
+
+			<div class="row photos">
+				<div class="col-md-4">
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px" />
+				</div>
+				<div class="col-md-4">
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
+				</div>
+				<div class="col-md-4">
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
+				</div>
+			</div>
+			<div class="row photos">
+				<div class="col-md-4">
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px" />
+				</div>
+				<div class="col-md-4">
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
+				</div>
+				<div class="col-md-4">
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
+				</div>
+			</div>
+			<div class="row photos">
+				<div class="col-md-4">
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px" />
+				</div>
+				<div class="col-md-4">
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
+				</div>
+				<div class="col-md-4">
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	</html>
