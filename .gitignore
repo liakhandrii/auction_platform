@@ -56,3 +56,4 @@ bower.json
 .byebug_history
 
 .idea/
+vendor/
