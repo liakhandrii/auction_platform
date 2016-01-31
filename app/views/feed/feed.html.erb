@@ -78,6 +78,42 @@
 			left: 157px;
 		}
 
+		#photo-blackout{
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+		}
+
+		#photo-popup{
+			width: 600px;
+			height: 600px;
+			background-color: #fff;
+			top: 80px;
+			z-index: 20;
+			display: block;
+			position: relative;
+			border-radius: 5px;
+		}
+
+		.big-photo{
+			width: 90%;
+			height: auto;
+			padding: 5%;
+			margin-left: 5%;
+		}
+
+		.photo-footer{
+			position: absolute;
+			bottom: 0;
+			border-radius: 0 0 5px 5px;
+			width: 100%;
+			height: 100px;
+			background-color: #fff;
+			margin-left: 0;
+		}
+
 		@media (min-width: 768px){
 			#searchBox{
 				width: 120px;
@@ -255,7 +291,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="blackout">
+		<div id="blackout" style="display: none;">
 			<div id="overlay"></div>
 
 			<div class="center-block" id="upload-popup">
@@ -294,6 +330,16 @@
 				</div>
 			</div>
 		</div>
+		<div id="photo-blackout">
+			<div id="overlay"></div>
+			<div class="center-block" id="photo-popup">
+				<a href="#" class="close" id="close-popup-photo" title="close" style="position: relative; left: -5px;">×</a>
+				<img src="http://lorempixel.com/500/500/" class="big-photo">
+				<div class="row photo-footer">
+					<div class="col-md-1"><img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-heart-outline-128.png" style="width: 300%; height: auto; cursor: pointer; margin-top: 3px;"></div>
+				</div>
+			</div>
+		</div>
 		<script type="text/javascript">
 			$( document ).ready(function() {
     			$('#upload').click(function(){
@@ -312,6 +358,11 @@
     				$('#blackout').css("display", "none");
     				$('.addPhotoAlert').css("display", "none");
     			});
+
+    			$('#close-popup-photo').click(function(){
+    				$('#photo-blackout').css("display", "none");
+    			});
+
 			});
 		</script>
 	</body>
