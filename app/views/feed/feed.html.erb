@@ -70,6 +70,14 @@
 			border-radius: 5px;
 		}
 
+		.addPhotoAlert{
+			display: none;
+			width: 70%; 
+			position: absolute; 
+			top: 247px; 
+			left: 157px;
+		}
+
 		@media (min-width: 768px){
 			#searchBox{
 				width: 120px;
@@ -127,6 +135,10 @@
 			}		
 			#upload-popup{
 				height: 410px;
+			}
+
+			.addPhotoAlert{
+				top: 332px;
 			}
 		}
 
@@ -247,6 +259,7 @@
 			<div id="overlay"></div>
 
 			<div class="center-block" id="upload-popup">
+				<a href="#" class="close" id="close-popup-upload" title="close" style="position: relative; left: -5px;">×</a>
 				<div class="center-block" style="margin-left: 10%; padding-top: 7%;">
 					<form class="form-inline">
 						<div class="form-group">
@@ -268,13 +281,38 @@
 						</form>
 						
 						<span id="helpBlock" class="help-block" style="margin-bottom: 0px;"><%= t('about')%></span>
-						<textarea class="form-control" id="inputHelpBlock" rows="3" style="width: 457px; max-width: 457px; height: 136px; max-height: 175px;"></textarea>
+						<textarea class="form-control" id="inputHelpBlock" rows="3" style="width: 457px; max-width: 457px; height: 136px; max-height: 136px;"></textarea>
 						</br>
-						<button type="submit" class="btn btn-success"><%= t('save')%></button>
+						<button type="submit" class="btn btn-success" id="addPhoto"><%= t('save')%></button>
+						<div class="alert alert-success addPhotoAlert" id="successText">
+							<strong><%= t('success')%></strong><%= t('successText')%>
+						</div>
+						<div class="alert alert-danger addPhotoAlert" id="dangerText" style="width: 50%;">
+							<strong><%= t('danger')%></strong><%= t('dangerText')%>
+						</div>
 					</form>
 				</div>
 			</div>
 		</div>
-		
+		<script type="text/javascript">
+			$( document ).ready(function() {
+    			$('#upload').click(function(){
+    				$('#blackout').css("display", "block");
+    			});
+    			var success = true;
+    			$('#addPhoto').click(function(){
+    				if(success){
+    					$('#successText').css("display", "block");
+    				}
+    				else{
+    					$('#dangerText').css("display", "block");
+    				}
+    			});
+    			$('#close-popup-upload').click(function(){
+    				$('#blackout').css("display", "none");
+    				$('.addPhotoAlert').css("display", "none");
+    			});
+			});
+		</script>
 	</body>
 	</html>
