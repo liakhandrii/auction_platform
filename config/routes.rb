@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :users
+
   get 'login/info'
   get 'login/profile'
   get 'feed/feed'
