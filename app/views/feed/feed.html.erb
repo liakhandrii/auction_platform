@@ -107,46 +107,46 @@
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 						<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 					</button>
-						<a class="navbar-brand" href="#">Auction'16</a>
+						<a class="navbar-brand" href="#"><%= t('auction')%>'16</a>
 					</div>
 
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="max-height: 540px;">
 						<ul class="nav navbar-nav">
 							<li id="teashers">
-								<a href="#">Teachers  <span class="badge">67</span></a>
+								<a href="#"><%= t('hello')%>  <span class="badge">67</span></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" id="drTeachers">
-									<li class="drli" id="jj"><a tabindex="-1" href="#">Men</a></li>
-									<li class="drli"><a tabindex="-1" href="#">Women</a></li>
+									<li class="drli" id="jj"><a tabindex="-1" href="#"><%= t('men')%></a></li>
+									<li class="drli"><a tabindex="-1" href="#"><%= t('women')%></a></li>
 								</ul>
 								<ul class="nav nav-tabs nav-stacked" id="mobileT">
-									<li class="drliM"><a tabindex="-1" href="#">Men</a></li>
-									<li class="drliM"><a tabindex="-1" href="#">Women</a></li>
+									<li class="drliM"><a tabindex="-1" href="#"><%= t('men')%></a></li>
+									<li class="drliM"><a tabindex="-1" href="#"><%= t('women')%></a></li>
 								</ul>
 							</li>
 							<li id="students">
-								<a href="#">Students  <span class="badge">78</span></a>
+								<a href="#"><%= t('students')%>  <span class="badge">78</span></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" id="drStudents">
-									<li class="drli"><a tabindex="-1" href="#">Men</a></li>
-									<li class="drli"><a tabindex="-1" href="#">Women</a></li>
+									<li class="drli"><a tabindex="-1" href="#"><%= t('boys')%></a></li>
+									<li class="drli"><a tabindex="-1" href="#"><%= t('girls')%></a></li>
 								</ul>
 								<ul class="nav nav-tabs nav-stacked" id="mobileS">
-									<li class="drliM"><a tabindex="-1" href="#">Men</a></li>
-									<li class="drliM"><a tabindex="-1" href="#">Women</a></li>
+									<li class="drliM"><a tabindex="-1" href="#"><%= t('boys')%></a></li>
+									<li class="drliM"><a tabindex="-1" href="#"><%= t('girls')%></a></li>
 								</ul>
 							</li>
 						</ul>
 
 						<ul class="nav navbar-nav navbar-right">
-							<li><a href="#" id="upload"><span class="glyphicon glyphicon-cloud-upload" style="margin-left: 10px; margin-top: -10px;"></span></br>Upload</a></li>
-							<li><a href="#" id="logout">Log Out</a></li>
+							<li><a href="#" id="upload"><span class="glyphicon glyphicon-cloud-upload" style="margin-left: 10px; margin-top: -10px;"></span></br><%= t('upload')%></a></li>
+							<li><a href="#" id="logout"><%= t('log_out')%></a></li>
 							<li>
 								<li>
 									<form class="navbar-form navbar-right" role="search" style="margin-left: 10px; margin-right: 25px;">
 										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Search" id="searchBox">
+											<input type="text" class="form-control" placeholder="<%= t('search')%>" id="searchBox">
 										</div> 
 										<button type="submit" class="btn btn-default">
-											Go
+											<%= t('go')%>
 										</button>
 									</form>
 								</li>
@@ -163,47 +163,47 @@
 		<div class="container-fluid center-block" style="width: 70%">
 			<div class="row photos">
 				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/140/140/" class="img-thumbnail center-block" width="250px" height="250px" />
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px" />
 				</div>
 				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/140/140/" class="img-thumbnail center-block" width="250px" height="250px"/>
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
 				</div>
 				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/140/140/" class="img-thumbnail center-block" width="250px" height="250px"/>
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
 				</div>
 			</div>
 
 			<div class="row photos">
 				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/140/140/" class="img-thumbnail center-block" width="250px" height="250px" />
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px" />
 				</div>
 				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/140/140/" class="img-thumbnail center-block" width="250px" height="250px"/>
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
 				</div>
 				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/140/140/" class="img-thumbnail center-block" width="250px" height="250px"/>
-				</div>
-			</div>
-			<div class="row photos">
-				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/140/140/" class="img-thumbnail center-block" width="250px" height="250px" />
-				</div>
-				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/140/140/" class="img-thumbnail center-block" width="250px" height="250px"/>
-				</div>
-				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/140/140/" class="img-thumbnail center-block" width="250px" height="250px"/>
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
 				</div>
 			</div>
 			<div class="row photos">
 				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/140/140/" class="img-thumbnail center-block" width="250px" height="250px" />
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px" />
 				</div>
 				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/140/140/" class="img-thumbnail center-block" width="250px" height="250px"/>
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
 				</div>
 				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/140/140/" class="img-thumbnail center-block" width="250px" height="250px"/>
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
+				</div>
+			</div>
+			<div class="row photos">
+				<div class="col-md-4">
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px" />
+				</div>
+				<div class="col-md-4">
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
+				</div>
+				<div class="col-md-4">
+					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
 				</div>
 			</div>
 		</div>
