@@ -42,6 +42,34 @@
 			background-color: #f8f8f8;
 		}
 
+		#blackout{
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+		}
+
+		#overlay{
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			background:rgba(0,0,0,0.6);
+			z-index: 10;
+		}
+
+
+		#upload-popup{
+			width: 600px;
+			height: 330px;
+			background-color: #fff;
+			top: 120px;
+			z-index: 20;
+			display: block;
+			position: relative;
+			border-radius: 5px;
+		}
+
 		@media (min-width: 768px){
 			#searchBox{
 				width: 120px;
@@ -92,15 +120,23 @@
 
 			#jj:hover{
 				background-color: #dddddd;
-			}			
+			}	
+
+			#linkAdd{
+				width: 30%;
+			}		
+			#upload-popup{
+				height: 410px;
+			}
 		}
 
+	
 		
 	</style>
 </head>
 <body>
 	<div class="container-fluid">
-		<div class="row">
+		<div class="row" style="z-index: 5;">
 			<div class="col-md-12">
 				<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 					<div class="navbar-header">
@@ -113,7 +149,7 @@
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="max-height: 540px;">
 						<ul class="nav navbar-nav">
 							<li id="teashers">
-								<a href="#"><%= t('hello')%>  <span class="badge">67</span></a>
+								<a href="#"><%= t('prof')%>  <span class="badge">67</span></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" id="drTeachers">
 									<li class="drli" id="jj"><a tabindex="-1" href="#"><%= t('men')%></a></li>
 									<li class="drli"><a tabindex="-1" href="#"><%= t('women')%></a></li>
@@ -159,7 +195,7 @@
 			</div>
 			
 		</div>
-
+		
 		<div class="container-fluid center-block" style="width: 70%">
 			<div class="row photos">
 				<div class="col-md-4">
@@ -207,6 +243,38 @@
 				</div>
 			</div>
 		</div>
+		<div id="blackout">
+			<div id="overlay"></div>
 
+			<div class="center-block" id="upload-popup">
+				<div class="center-block" style="margin-left: 10%; padding-top: 7%;">
+					<form class="form-inline">
+						<div class="form-group">
+							<div class="input-group input-group">
+								<span class="input-group-addon glyphicon glyphicon-cloud-upload" id="basic-addon1" style="top: 0px;"></span>
+								<a class='btn btn-default' href='javascript:;' style="border-radius: 0 2px 2px 0;">
+									<strong><%= t('chooseFile')%></strong>
+									<input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+								</a>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail2"><%= t('or')%></label>
+							<div class="input-group input-group">
+								<span class="input-group-addon glyphicon glyphicon-link" id="basic-addon1" style="top: 0px;"></span>
+								<input type="text" class="form-control" placeholder="<%= t('link')%>" aria-describedby="basic-addon1" id="linkAdd">
+							</div>
+						</div>
+						</form>
+						
+						<span id="helpBlock" class="help-block" style="margin-bottom: 0px;"><%= t('about')%></span>
+						<textarea class="form-control" id="inputHelpBlock" rows="3" style="width: 457px; max-width: 457px; height: 136px; max-height: 175px;"></textarea>
+						</br>
+						<button type="submit" class="btn btn-success"><%= t('save')%></button>
+					</form>
+				</div>
+			</div>
+		</div>
+		
 	</body>
 	</html>
