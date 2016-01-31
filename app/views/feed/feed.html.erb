@@ -77,41 +77,19 @@
 			top: 247px; 
 			left: 157px;
 		}
+		.modal-dialog {
 
-		#photo-blackout{
-			width: 100%;
-			height: 100%;
-			position: fixed;
-			top: 0;
-			left: 0;
+		}
+		.thumbnail {
+			margin-bottom:6px;
 		}
 
-		#photo-popup{
-			width: 600px;
-			height: 600px;
-			background-color: #fff;
-			top: 80px;
-			z-index: 20;
-			display: block;
-			position: relative;
-			border-radius: 5px;
+		.carousel-control.left,.carousel-control.right{
+			background-image:none;
 		}
 
-		.big-photo{
-			width: 90%;
-			height: auto;
-			padding: 5%;
-			margin-left: 5%;
-		}
-
-		.photo-footer{
-			position: absolute;
-			bottom: 0;
-			border-radius: 0 0 5px 5px;
-			width: 100%;
-			height: 100px;
-			background-color: #fff;
-			margin-left: 0;
+		.photos{
+			margin-top: 100px;
 		}
 
 		@media (min-width: 768px){
@@ -132,19 +110,7 @@
 
 			#mobileS{
 				display: none;
-			}
-			.photos:first-child{
-				margin-top: 100px;
-			}
-			.photos{
-				margin-top: 45px;
-			}
-			.photos:last-child{
-				margin-bottom: 45px;
-			}
-			
-
-			
+			}			
 		}
 
 		@media (max-width: 768px){
@@ -178,7 +144,7 @@
 			}
 		}
 
-	
+
 		
 	</style>
 </head>
@@ -189,8 +155,8 @@
 				<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-					</button>
+							<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+						</button>
 						<a class="navbar-brand" href="#"><%= t('auction')%>'16</a>
 					</div>
 
@@ -244,53 +210,7 @@
 			
 		</div>
 		
-		<div class="container-fluid center-block" style="width: 70%">
-			<div class="row photos">
-				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px" />
-				</div>
-				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
-				</div>
-				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
-				</div>
-			</div>
 
-			<div class="row photos">
-				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px" />
-				</div>
-				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
-				</div>
-				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
-				</div>
-			</div>
-			<div class="row photos">
-				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px" />
-				</div>
-				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
-				</div>
-				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
-				</div>
-			</div>
-			<div class="row photos">
-				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px" />
-				</div>
-				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
-				</div>
-				<div class="col-md-4">
-					<img alt="image" src="http://lorempixel.com/500/500/" class="img-thumbnail center-block" width="250px" height="250px"/>
-				</div>
-			</div>
-		</div>
 		<div id="blackout" style="display: none;">
 			<div id="overlay"></div>
 
@@ -314,56 +234,110 @@
 								<input type="text" class="form-control" placeholder="<%= t('link')%>" aria-describedby="basic-addon1" id="linkAdd">
 							</div>
 						</div>
-						</form>
-						
-						<span id="helpBlock" class="help-block" style="margin-bottom: 0px;"><%= t('about')%></span>
-						<textarea class="form-control" id="inputHelpBlock" rows="3" style="width: 457px; max-width: 457px; height: 136px; max-height: 136px;"></textarea>
-						</br>
-						<button type="submit" class="btn btn-success" id="addPhoto"><%= t('save')%></button>
-						<div class="alert alert-success addPhotoAlert" id="successText">
-							<strong><%= t('success')%></strong><%= t('successText')%>
-						</div>
-						<div class="alert alert-danger addPhotoAlert" id="dangerText" style="width: 50%;">
-							<strong><%= t('danger')%></strong><%= t('dangerText')%>
-						</div>
 					</form>
+
+					<span id="helpBlock" class="help-block" style="margin-bottom: 0px;"><%= t('about')%></span>
+					<textarea class="form-control" id="inputHelpBlock" rows="3" style="width: 457px; max-width: 457px; height: 136px; max-height: 136px;"></textarea>
+				</br>
+				<button type="submit" class="btn btn-success" id="addPhoto"><%= t('save')%></button>
+				<div class="alert alert-success addPhotoAlert" id="successText">
+					<strong><%= t('success')%></strong><%= t('successText')%>
+				</div>
+				<div class="alert alert-danger addPhotoAlert" id="dangerText" style="width: 50%;">
+					<strong><%= t('danger')%></strong><%= t('dangerText')%>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row photos">
+	
+		<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 1" href="#"><img class="thumbnail img-responsive" src="https://pp.vk.me/c624624/v624624377/1e4c1/sNPjdcdHWj0.jpg"></a></div>
+		<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 2" href="#"><img class="thumbnail img-responsive" src="https://pp.vk.me/c625427/v625427377/45cda/G_TvJ0FGDlk.jpg"></a></div>
+		<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 3" href="#"><img class="thumbnail img-responsive" src="https://pp.vk.me/c625521/v625521800/18090/W9O5WhKpRi4.jpg"></a></div>
+		<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 4" href="#"><img class="thumbnail img-responsive" src="https://pp.vk.me/c627723/v627723377/2dfe3/gNMxhfKSXNY.jpg"></a></div>
+
+	</div>
+</div>
+<div class="modal" id="myModal" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button class="close" type="button" data-dismiss="modal">×</button>
+				<h3 class="modal-title"></h3>
+			</div>
+			<div class="modal-body">
+				<div id="modalCarousel" class="carousel">
+					<div class="carousel-inner"></div>
+					<a class="carousel-control left" href="#modalCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+					<a class="carousel-control right" href="#modalCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
 				</div>
 			</div>
-		</div>
-		<div id="photo-blackout">
-			<div id="overlay"></div>
-			<div class="center-block" id="photo-popup">
-				<a href="#" class="close" id="close-popup-photo" title="close" style="position: relative; left: -5px;">×</a>
-				<img src="http://lorempixel.com/500/500/" class="big-photo">
-				<div class="row photo-footer">
-					<div class="col-md-1"><img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-heart-outline-128.png" style="width: 300%; height: auto; cursor: pointer; margin-top: 3px;"></div>
-				</div>
+			<div class="modal-footer">
+				
 			</div>
 		</div>
-		<script type="text/javascript">
-			$( document ).ready(function() {
-    			$('#upload').click(function(){
-    				$('#blackout').css("display", "block");
-    			});
-    			var success = true;
-    			$('#addPhoto').click(function(){
-    				if(success){
-    					$('#successText').css("display", "block");
-    				}
-    				else{
-    					$('#dangerText').css("display", "block");
-    				}
-    			});
-    			$('#close-popup-upload').click(function(){
-    				$('#blackout').css("display", "none");
-    				$('.addPhotoAlert').css("display", "none");
-    			});
+	</div>
+</div>
 
-    			$('#close-popup-photo').click(function(){
-    				$('#photo-blackout').css("display", "none");
-    			});
 
-			});
-		</script>
-	</body>
-	</html>
+
+<script type="text/javascript">
+	$( document ).ready(function() {
+		$('#upload').click(function(){
+			$('#blackout').css("display", "block");
+		});
+		var success = true;
+		$('#addPhoto').click(function(){
+			if(success){
+				$('#successText').css("display", "block");
+			}
+			else{
+				$('#dangerText').css("display", "block");
+			}
+		});
+		$('#close-popup-upload').click(function(){
+			$('#blackout').css("display", "none");
+			$('.addPhotoAlert').css("display", "none");
+		});
+
+		$('.row .thumbnail').click(function() {
+
+		}).each(function(i) {
+			console.log(i);
+			if(this.complete) {
+				var item = $('<div class="item"></div>');
+				var itemDiv = $(this).parents('div');
+				var title = $(this).parent('a').attr("title");
+
+				item.attr("title",title);
+				$(itemDiv.html()).appendTo(item);
+				item.appendTo('.carousel-inner'); 
+				
+			    if (i==0){ // set first item active
+			    	item.addClass('active');
+			    }
+		}
+		});
+
+		/* activate the carousel */
+		$('#modalCarousel').carousel({interval:false});
+
+		/* change modal title when slide changes */
+		$('#modalCarousel').on('slid.bs.carousel', function () {
+			$('.modal-title').html($(this).find('.active').attr("title"));
+		})
+
+		/* when clicking a thumbnail */
+		$('.row .thumbnail').click(function(){
+			var idx = $(this).parents('div').index();
+			var id = parseInt(idx);
+		  	$('#myModal').modal('show'); // show the modal
+		    $('#modalCarousel').carousel(id); // slide carousel to selected
+		});
+
+	});
+</script>
+</body>
+</html>
