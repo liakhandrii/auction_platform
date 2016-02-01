@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
 
+  get 'index', to: "landing#index"
+
   resources :users
 
-  get 'login/info'
-  get 'login/profile'
-  get 'feed/feed'
+  get 'login', to: "login#index"
+  get 'info', to: "login#info"
+  get 'profile', to: "login#profile"
+  get 'feed', to: "feed#feed"
+
+  post 'info/update', to: "login#update_info"
 
   get '/auth/:provider/callback', to: "sessions#create"
   delete 'sign_out',  to: "sessions#destroy", as: 'sign_out'
@@ -12,7 +17,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'login#index'
+  root 'landing#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

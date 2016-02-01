@@ -188,7 +188,7 @@
 
 						<ul class="nav navbar-nav navbar-right">
 							<li><a href="#" id="upload"><span class="glyphicon glyphicon-cloud-upload" style="margin-left: 10px; margin-top: -10px;"></span></br><%= t('upload')%></a></li>
-							<li><a href="#" id="logout"><%= t('log_out')%></a></li>
+							<li><%= link_to t('log_out'), sign_out_url, method: :delete %></li>
 							<li>
 								<li>
 									<form class="navbar-form navbar-right" role="search" style="margin-left: 10px; margin-right: 25px;">
