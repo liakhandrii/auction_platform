@@ -5,7 +5,7 @@ class FeedController < ApplicationController
   	end
 
   	def upload
-  		render 'feed'
+  		render 'upload'
   	end
 
 end

@@ -55,11 +55,6 @@
   }
 </style>
 <% if current_user %>
-    <%= form_for(current_user, multipart: true) do |form| %>
-        <%= form.file_field :photo %>
-        <%= form.submit %>
-    <% end %>
-
     <div id="info_block" class="center-block">
       <div class="text-center">
         <%= image_tag(@auth['info']['image'], width: '100', height: '100', class: 'img-circle') %>
