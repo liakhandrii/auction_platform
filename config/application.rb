@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'mongoid'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -19,6 +20,8 @@ module AuctionPlatform
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :en
+
+    Mongoid.load!(File.expand_path('mongoid.yml', './config'))
 
     config.assets.paths << Rails.root.join("vendor/bootstrap-3.3.6-dist")
 

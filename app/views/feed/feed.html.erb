@@ -217,7 +217,8 @@
 			<div class="center-block" id="upload-popup">
 				<a href="#" class="close" id="close-popup-upload" title="close" style="position: relative; left: -5px;">×</a>
 				<div class="center-block" style="margin-left: 10%; padding-top: 7%;">
-					<form class="form-inline">
+					<form class="form-inline" method="post" action="/upload" enctype="multipart/form-data">
+					<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 						<div class="form-group">
 							<div class="input-group input-group">
 								<span class="input-group-addon glyphicon glyphicon-cloud-upload" id="basic-addon1" style="top: 0px;"></span>
@@ -231,15 +232,17 @@
 							<label for="exampleInputEmail2"><%= t('or')%></label>
 							<div class="input-group input-group">
 								<span class="input-group-addon glyphicon glyphicon-link" id="basic-addon1" style="top: 0px;"></span>
-								<input type="text" class="form-control" placeholder="<%= t('link')%>" aria-describedby="basic-addon1" id="linkAdd">
+								<input type="text" class="form-control" placeholder="<%= t('link')%>" aria-describedby="basic-addon1" id="linkAdd" name="link">
 							</div>
 						</div>
-					</form>
 
 					<span id="helpBlock" class="help-block" style="margin-bottom: 0px;"><%= t('about')%></span>
-					<textarea class="form-control" id="inputHelpBlock" rows="3" style="width: 457px; max-width: 457px; height: 136px; max-height: 136px;"></textarea>
+					<input type="text" name="faculty" placeholder="Faculty"><br>
+					<textarea name="description" class="form-control" id="inputHelpBlock" rows="3" style="width: 457px; max-width: 457px; height: 136px; max-height: 136px;"></textarea>
 				</br>
-				<button type="submit" class="btn btn-success" id="addPhoto"><%= t('save')%></button>
+				<input type="submit" class="btn btn-success" value="<%= t('save')%>">
+				<!--<button type="submit" class="btn btn-success" id="addPhoto"><%= t('save')%></button>-->
+				</form>
 				<div class="alert alert-success addPhotoAlert" id="successText">
 					<strong><%= t('success')%></strong><%= t('successText')%>
 				</div>
@@ -258,6 +261,15 @@
 		<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 3" href="#"><img class="thumbnail img-responsive" src="https://pp.vk.me/c625521/v625521800/18090/W9O5WhKpRi4.jpg"></a></div>
 		<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 4" href="#"><img class="thumbnail img-responsive" src="https://pp.vk.me/c627723/v627723377/2dfe3/gNMxhfKSXNY.jpg"></a></div>
 
+		<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 5" href="#"><img class="thumbnail img-responsive" src="https://pp.vk.me/c624624/v624624377/1e4c1/sNPjdcdHWj0.jpg"></a></div>
+		<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 6" href="#"><img class="thumbnail img-responsive" src="https://pp.vk.me/c625427/v625427377/45cda/G_TvJ0FGDlk.jpg"></a></div>
+		<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 7" href="#"><img class="thumbnail img-responsive" src="https://pp.vk.me/c625521/v625521800/18090/W9O5WhKpRi4.jpg"></a></div>
+		<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 8" href="#"><img class="thumbnail img-responsive" src="https://pp.vk.me/c627723/v627723377/2dfe3/gNMxhfKSXNY.jpg"></a></div>
+
+		<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 9" href="#"><img class="thumbnail img-responsive" src="https://pp.vk.me/c624624/v624624377/1e4c1/sNPjdcdHWj0.jpg"></a></div>
+		<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 10" href="#"><img class="thumbnail img-responsive" src="https://pp.vk.me/c625427/v625427377/45cda/G_TvJ0FGDlk.jpg"></a></div>
+		<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 11" href="#"><img class="thumbnail img-responsive" src="https://pp.vk.me/c625521/v625521800/18090/W9O5WhKpRi4.jpg"></a></div>
+		<div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 12" href="#"><img class="thumbnail img-responsive" src="https://pp.vk.me/c627723/v627723377/2dfe3/gNMxhfKSXNY.jpg"></a></div>
 	</div>
 </div>
 <div class="modal" id="myModal" role="dialog">
@@ -281,6 +293,8 @@
 	</div>
 </div>
 
+<%= flash[:notice] %>
+<%= @lot.attachment.url %>
 
 
 <script type="text/javascript">
@@ -326,7 +340,7 @@
 
 		/* change modal title when slide changes */
 		$('#modalCarousel').on('slid.bs.carousel', function () {
-			$('.modal-title').html($(this).find('.active').attr("title"));
+			$('.modal-title').html($(this).find('.active').attr("title").html);
 		})
 
 		/* when clicking a thumbnail */

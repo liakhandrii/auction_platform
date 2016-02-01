@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'info', to: "login#info"
   get 'profile', to: "login#profile"
   get 'feed', to: "feed#feed"
+  post 'upload', to: "feed#upload"
 
   post 'info/update', to: "login#update_info"
 
