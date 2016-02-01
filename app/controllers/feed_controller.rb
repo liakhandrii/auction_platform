@@ -1,11 +1,11 @@
 class FeedController < ApplicationController
 
 	def feed
-		
+
 	 	if !current_user then 
 	      redirect_to login_path 
 	    else
-	      @lot = Lot.find(2)
+	      @lot = Lot.last
 	      render 'feed'
 	    end
 
