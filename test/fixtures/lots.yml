@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  attachment: MyString
+  link: MyString
+  name: MyString
+  uid: MyString
+  description: MyText
+  faculty: MyString
+  timestamp: 2016-02-01 16:24:30
+
+two:
+  attachment: MyString
+  link: MyString
+  name: MyString
+  uid: MyString
+  description: MyText
+  faculty: MyString
+  timestamp: 2016-02-01 16:24:30
