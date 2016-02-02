@@ -23,9 +23,9 @@ class FeedController < ApplicationController
 			@lot = nil
 
 	    	if params[:link] && params[:link] != ""  then
-	    		@lot = Lot.new(:attachment => File.open(params[:link]), :name => current_user[:name], :uid => current_user[:uid], :description => params[:description], :faculty => params[:faculty])
+	    		@lot = Lot.new(:bet => 20, :attachment => File.open(params[:link]), :name => current_user[:name], :uid => current_user[:uid], :description => params[:description], :faculty => params[:faculty])
 	    	else
-	    		@lot = Lot.new(:attachment => params[:file_source], :name => current_user[:name], :uid => current_user[:uid], :description => params[:description], :faculty => params[:faculty])
+	    		@lot = Lot.new(:bet => 20, :attachment => params[:file_source], :name => current_user[:name], :uid => current_user[:uid], :description => params[:description], :faculty => params[:faculty])
 	    	end
 
 	    	if @lot.save!
