@@ -1,5 +1,5 @@
 class FeedController < ApplicationController
-
+  
   def feed
     if !current_user then
       redirect_to login_path
