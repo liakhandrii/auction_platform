@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  #Dynamic Rails Error Pages
+  get "/404" => "errors#not_found"
+  get "/500" => "errors#internal_server_error"
+
+  get 'errors/not_found'
+
+  get 'errors/internal_server_error'
 
   get 'index', to: "landing#index"
 

@@ -27,6 +27,9 @@ module AuctionPlatform
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    
+    #TELL RAILS TO USE OUR ROUTES FOR ERROR HANDLING
+    config.exceptions_app = self.routes
 
     I18n.config.available_locales = :uk
 
