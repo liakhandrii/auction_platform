@@ -53,5 +53,3 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-vkontakte'
 
 gem 'paperclip'
-
-gem 'mongoid'

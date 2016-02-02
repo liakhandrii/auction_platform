@@ -21,8 +21,9 @@ module AuctionPlatform
     # config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :en
 
-    Mongoid.load!(File.expand_path('mongoid.yml', './config'))
+    # Mongoid.load!(File.expand_path('mongoid.yml', './config'))
 
+    config.assets.paths << Rails.root.join("vendor/bootstrap-3.3.6-dist")
     config.assets.paths << Rails.root.join("vendor/bootstrap-3.3.6-dist")
 
     # Do not swallow errors in after_commit/after_rollback callbacks.

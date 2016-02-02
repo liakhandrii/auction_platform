@@ -1,40 +1,47 @@
 class FeedController < ApplicationController
 
-	def feed
+  def feed
+    if !current_user then
+      redirect_to login_path
+    else
+      @lot = Lot.last
+      @lots = Lot.all
+      render 'feed'
+    end
+  end
 
-	 	if !current_user then 
-	      redirect_to login_path 
-	    else
-	      @lot = Lot.last
-	      render 'feed'
-	    end
+  def upload
+    if !current_user then
+      redirect_to login_path
+    else
+      params.permit(:authenticity_token, :link, :faculty, :description)
+      params.permit(:authenticity_token, :file_source, :faculty, :description)
+      params.permit(:authenticity_token, :file_source, :link, :faculty)
+      params.permit(:authenticity_token, :file_source, :link, :description)
 
-  	end
+      @lot = nil
 
-  	def upload
-	  	if !current_user then 
-	      redirect_to login_path 
-	    else
-	    	params.permit(:authenticity_token, :link, :faculty, :description)
-	    	params.permit(:authenticity_token, :file_source, :faculty, :description)
-	    	params.permit(:authenticity_token, :file_source, :link, :faculty)
-	    	params.permit(:authenticity_token, :file_source, :link, :description)
+      if params[:link] && params[:link] != "" then
+        @lot = Lot.new(:attachment => File.open(params[:link]), :name => current_user[:name], :uid => current_user[:uid], :description => params[:description], :faculty => params[:faculty])
+      else
+        @lot = Lot.new(:attachment => params[:file_source], :name => current_user[:name], :uid => current_user[:uid], :description => params[:description], :faculty => params[:faculty])
+      end
 
-			@lot = nil
+      if @lot.save!
+        redirect_to feed_path, notice: "The lot #{@lot.name} has been saved for moderation."
+      else
+        redirect_to feed_path, notice: "There was a problem saving the lot #{@lot.name}. Please check all the fields."
+      end
+      #render 'upload'
+    end
+  end
 
-	    	if params[:link] && params[:link] != ""  then
-	    		@lot = Lot.new(:attachment => File.open(params[:link]), :name => current_user[:name], :uid => current_user[:uid], :description => params[:description], :faculty => params[:faculty])
-	    	else
-	    		@lot = Lot.new(:attachment => params[:file_source], :name => current_user[:name], :uid => current_user[:uid], :description => params[:description], :faculty => params[:faculty])
-	    	end
+  private
 
-	    	if @lot.save!
-         		redirect_to feed_path, notice: "The lot #{@lot.name} has been saved for moderation."
-      		else
-         		redirect_to feed_path, notice: "There was a problem saving the lot #{@lot.name}. Please check all the fields."
-      		end
-	      #render 'upload'
-	    end
-  	end
+  def lots
+    @lots = Lot.all
+  end
+
+  helper_method :lots
 
 end
