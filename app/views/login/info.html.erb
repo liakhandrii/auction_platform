@@ -38,19 +38,19 @@
         <div class="text-center">
           <%= image_tag(@auth['info']['image'], width: '100', height: '100', class: 'img-circle') %>
           <div class="alert alert-info">
-              <h5><strong>Hey, <%= current_user.name %>!</strong> Here is the message specially for you.</h5>
+              <h5><strong><%= t('hey') %>, <%= current_user.name %>!</strong> <%= t('message') %></h5>
 
-             <h5><strong>We just need a little but more information about you.</strong></h5>
-              <h5>Please, write down your true name and phone number.</h5>
+             <h5><strong><%= t('more') %></strong></h5>
+              <h5><%= t('namephone') %></h5>
           </div>
             <form action="info/update" method="post">
               <div class="input-group input-group-lg">
                 <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1" style="top: 0px;"></span>
-                  <input type="text" class="form-control" placeholder="Name" aria-describedby="basic-addon1" value="<%= current_user.name %>" name="name">
+                  <input type="text" class="form-control" placeholder="<%= t('name') %>" aria-describedby="basic-addon1" value="<%= current_user.name %>" name="name">
               </div>
               <div class="input-group input-group-lg">
                 <span class="input-group-addon glyphicon glyphicon-earphone" id="basic-addon1" style="top: 0px;"></span>
-                 <input type="text" class="form-control" placeholder="Phone" aria-describedby="basic-addon1" name="phone">
+                 <input type="text" class="form-control" placeholder="<%= t('phone') %>" aria-describedby="basic-addon1" name="phone">
               </div>
         <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
         <div class="text-center">
