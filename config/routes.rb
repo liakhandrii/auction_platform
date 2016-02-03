@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   resources :users
 
+  get 'get-bet', to: "bet#getBetByLotId"
+
   get 'login', to: "login#index"
   get 'info', to: "login#info"
   get 'profile', to: "login#profile"

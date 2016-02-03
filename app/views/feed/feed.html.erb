@@ -282,7 +282,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-body">
-          <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+          <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
             <!-- Indicators -->
             <ol class="carousel-indicators">
               <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -296,9 +296,8 @@
               <% @lots.each do |lot_photo| %>
                   <div class="item">
                     <img src="http://localhost:3000/<%= lot_photo.attachment %>" alt="<%= lot_photo.description %>">
-                    <div class="carousel-caption">
-                      <%= lot_photo.uid %>
-                    </div>
+                    <input class="hidden" id="lot_id" value="<%= lot_photo.id %>"/>
+                    <div class="carousel-caption" id="user_id"><%= lot_photo.uid %></div>
                   </div>
               <% end %>
             </div>
@@ -328,7 +327,7 @@
                     <span class="glyphicon glyphicon-minus-sign" style="font-size:3.5em; color: #EA4335"></span>
                   </td>
                   <td>
-                    <input type="text" class="form-control" style="display: block; width: 87px; background-color:#d4d4d4; color: #FFF;" disabled>
+                    <input type="text" class="form-control" style="display: block; width: 87px; background-color:#d4d4d4; color: #FFF;" id="confirmed_bet" disabled>
                   </td>
                   <td colspan="4">
                     <span class="glyphicon glyphicon-plus-sign" style="font-size:3.5em;color: #34A853"></span>
@@ -340,6 +339,9 @@
               <div class="alert alert-success">
                 <strong>Success!</strong> Indicates a successful or positive action.
               </div>
+              <button class="btn btn-primary btn-lg" id="betConfirmBtn" onclick="getBet()">
+                Confirm bet
+              </button>
             </div>
           </div>
         </div>
@@ -367,16 +369,20 @@
 
     /* activate the carousel */
     $('#carouselModal').carousel({interval: false});
-
-    /* when clicking a thumbnail */
-    $('.row .thumbnail').click(function () {
-      var idx = $(this).parents('div').index();
-      var id = parseInt(idx);
-      $('#myModal').modal('show'); // show the modal
-      $('#modalCarousel').carousel(id); // slide carousel to selected
-    });
-
   });
+
+  function getBet() {
+    var data = {
+      'user_id': document.getElementById('user_id').innerHTML ,
+      'lot_id': document.getElementById('lot_id').value,
+      'confirmed_bet': document.getElementById('confirmed_bet').value
+    };
+    $.getJSON('/get-bet',
+        data,
+        function (data) {
+
+        });
+  }
 </script>
 </body>
 </html>

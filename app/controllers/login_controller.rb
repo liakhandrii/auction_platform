@@ -3,7 +3,7 @@ class LoginController < ApplicationController
   before_action :set_auth
 
   def index
-    if current_user then 
+    if current_user then
       if current_user[:phone] then
         redirect_to feed_path
       else
