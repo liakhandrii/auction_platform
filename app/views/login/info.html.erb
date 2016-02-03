@@ -64,20 +64,47 @@
         </h5>
         <h5 class="about_text"><strong>We just need a little but more information about you.</strong></h5>
         <h5 class="about_text">Please, write down your true name and phone number.</h5>
+        <div id="formInfo"></div>
       </div>
-      <form action="info/update" method="post">
+      <form action="info/update" name="userForm">
         <div class="input-group input-group-lg">
           <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1" style="top: 0px;"></span>
-          <input type="text" class="form-control" placeholder="Name" aria-describedby="basic-addon1" value="<%= current_user.name %>" name="name">
+          <input type="text" class="form-control" placeholder="Name" aria-describedby="basic-addon1" value="<%= current_user.name %>"
+                 name="name" id="name">
         </div>
         <div class="input-group input-group-lg">
           <span class="input-group-addon glyphicon glyphicon-earphone" id="basic-addon1" style="top: 0px;"></span>
-          <input type="text" class="form-control" placeholder="Phone" aria-describedby="basic-addon1" name="phone">
+          <input type="text" class="form-control" placeholder="Phone" aria-describedby="basic-addon1" name="phone" id="phone">
         </div>
         <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
         <div>
-          <input type="submit" class="btn btn-success btn-lg" id="done_button" value="Done">
+          <a class="bt1n btn-success btn-lg" href="javascript:checkForm()">
+            Done
+          </a>
         </div>
       </form>
     </div>
+    <script>
+      function checkForm() {
+        var name = document.getElementById('name').value;
+        var phone = document.getElementById('phone').value;
+
+        if (name.length > 0 && phone.length > 9) {
+          if (isValidUkrainianNumber(phone))
+            document.userForm.submit();
+          else
+            document.getElementById('formInfo').innerHTML = '<div class="alert alert-danger"> Phone is not correct </div>';
+        } else {
+          document.getElementById('formInfo').innerHTML = '<div class="alert alert-danger"> All fields should be filled</div>';
+        }
+      }
+
+      function isValidUkrainianNumber(number) {
+        if (number.length == 13 && number.substr(0, 4) == "+380" && $.isNumeric(number.substr(1)))
+          return true;
+        else if (number.length == 10 && number.substr(0, 1) == "0" && $.isNumeric(number))
+          return true;
+        return false;
+      }
+    </script>
 <% end %>
