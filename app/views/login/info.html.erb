@@ -48,27 +48,24 @@
             <h5><%= t('namephone') %></h5>
             <div id="formInfo"></div>
           </div>
-          <form action="info/update" method="post" name="userForm">
-            <div class="input-group input-group-lg">
-              <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1" style="top: 0px;"></span>
-              <input type="text" class="form-control" placeholder="<%= t('name') %>" aria-describedby="basic-addon1"
-                     value="<%= current_user.name %>"
-                     name="name"
-                     id="name">
-            </div>
-            <div class="input-group input-group-lg">
-              <span class="input-group-addon glyphicon glyphicon-earphone" id="basic-addon1" style="top: 0px;"></span>
-              <input type="text" class="form-control" placeholder="<%= t('phone') %>"
-                     aria-describedby="basic-addon1"
-                     name="phone"
-                     id="phone">
-            </div>
-            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-          </form>
-          <div class="text-center">
-            <a class="bt1n btn-success btn-lg" href="javascript:checkForm()">
-              Done
-            </a>
+            <form action="info/update" method="post" name="userForm">
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1" style="top: 0px;"></span>
+                <input type="text" class="form-control" placeholder="<%= t('name') %>" aria-describedby="basic-addon1"
+                       value="<%= current_user.name %>" name="name" id="name">
+              </div>
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon glyphicon glyphicon-earphone" id="basic-addon1" style="top: 0px;"></span>
+                <input type="text" class="form-control" placeholder="<%= t('phone') %>" aria-describedby="basic-addon1"
+                       name="phone" id="phone">
+              </div>
+              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+              <div class="text-center">
+                <a href="javascript:checkForm()" class="btn btn-success btn-lg" id="done_button">
+                  Done
+                </a>
+              </div>
+            </form>
           </div>
         </div>
       </div>

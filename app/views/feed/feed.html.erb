@@ -238,7 +238,7 @@
             </div>
           </div>
           <div class="col-lg-2">
-            <p class="hidden-xs glyphicon glyphicon-resize-horizontal" style="margin: 6px 51px 29px;"></p></div>
+            <p class="hidden-xs glyphicon" style="margin: 6px 51px 29px;"><%= t('or')%></p></div>
           <div class="form-group col-lg-7">
             <div class="input-group hidden-xs ">
               <span class="input-group-addon glyphicon glyphicon-link" id="basic-addon1" style="top: 0px;"></span>
@@ -249,7 +249,7 @@
             <p id="helpBlock"><b><%= t('about') %></b></p>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" name="faculty" placeholder="Faculty">
+            <input type="text" class="form-control" name="faculty" placeholder="<%= t('faculty') %>">
           </div>
           <div class="form-group">
             <textarea name="description" class="form-control" id="inputHelpBlock" rows="5"></textarea>
@@ -332,12 +332,12 @@
                       </div>
                       <div class="col-md-6">
                         <div class="alert alert-success">
-                        <%= @bet = @bets.find_by(lot_id: lot_photo.id) %>
-                          <% if @bet != nil && @bet.user_id %>
-                              <%= @users.find(@bets.find_by(lot_id: lot_photo.id).user_id).name %>
-                          <% else %>
-                              No bets
-                          <% end %>
+                        <%= @bet = @bets.find_by(lot_id: lot_photo.id) 
+                           if @bet != nil && @bet.user_id 
+                               @users.find(@bets.find_by(lot_id: lot_photo.id).user_id).name 
+                           else 
+                              t('no_bets')
+                           end %>
                         </div>
                         <button class="btn btn-primary btn-lg" id="betConfirmBtn" onclick="getBet(<%=lot_photo.id%>)">
                           Confirm bet
