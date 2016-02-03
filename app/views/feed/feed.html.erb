@@ -336,11 +336,11 @@
                            if @bet != nil && @bet.user_id 
                                @users.find(@bets.find_by(lot_id: lot_photo.id).user_id).name 
                            else 
-                              t('no_bets')
+                               t('no_bets')
                            end %>
                         </div>
                         <button class="btn btn-primary btn-lg" id="betConfirmBtn" onclick="getBet(<%=lot_photo.id%>)">
-                          Confirm bet
+                          <%= t('confirm_bet') %>
                         </button>
                       </div>
                     </div>
@@ -351,11 +351,11 @@
             <!-- Controls -->
             <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
               <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
+              <span class="sr-only"><%= t('previous_lot') %></span>
             </a>
             <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
               <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
+              <span class="sr-only"><%= t('next_lot') %></span>
             </a>
           </div>
         </div>
