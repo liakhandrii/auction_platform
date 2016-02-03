@@ -2,7 +2,8 @@
 <style type="text/css">
   body {
     background-color: #dddddd;
-  }  
+  }
+
   .about_text {
     color: #3a8bc5;
     margin: 5%;
@@ -18,18 +19,21 @@
   .input-group-btn > .glyphicon {
     top: 0px;
   }
-  .text-center{
+
+  .text-center {
     margin-top: 50px;
   }
-  .alert{
+
+  .alert {
     margin-top: 15px;
     padding-right: 35px;
     padding-left: 35px;
     margin-left: 70px;
     margin-right: 70px;
   }
-  .jumbotron{
-    background: rgba(255,255,255,0.8);
+
+  .jumbotron {
+    background: rgba(255, 255, 255, 0.8);
   }
 </style>
 <% if current_user %>
@@ -38,26 +42,55 @@
         <div class="text-center">
           <%= image_tag(@auth['info']['image'], width: '100', height: '100', class: 'img-circle') %>
           <div class="alert alert-info">
-              <h5><strong><%= t('hey') %>, <%= current_user.name %>!</strong> <%= t('message') %></h5>
+            <h5><strong><%= t('hey') %>, <%= current_user.name %>!</strong> <%= t('message') %></h5>
 
-             <h5><strong><%= t('more') %></strong></h5>
-              <h5><%= t('namephone') %></h5>
+            <h5><strong><%= t('more') %></strong></h5>
+            <h5><%= t('namephone') %></h5>
+            <div id="formInfo"></div>
           </div>
-            <form action="info/update" method="post">
+            <form action="info/update" method="post" name="userForm">
               <div class="input-group input-group-lg">
                 <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1" style="top: 0px;"></span>
-                  <input type="text" class="form-control" placeholder="<%= t('name') %>" aria-describedby="basic-addon1" value="<%= current_user.name %>" name="name">
+                <input type="text" class="form-control" placeholder="<%= t('name') %>" aria-describedby="basic-addon1"
+                       value="<%= current_user.name %>" name="name" id="name">
               </div>
               <div class="input-group input-group-lg">
                 <span class="input-group-addon glyphicon glyphicon-earphone" id="basic-addon1" style="top: 0px;"></span>
-                 <input type="text" class="form-control" placeholder="<%= t('phone') %>" aria-describedby="basic-addon1" name="phone">
+                <input type="text" class="form-control" placeholder="<%= t('phone') %>" aria-describedby="basic-addon1"
+                       name="phone" id="phone">
               </div>
-        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-        <div class="text-center">
-                <input type="submit" class="btn btn-success btn-lg" id="done_button" value="Done">
-            </div>
+              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+              <div class="text-center">
+                <a href="javascript:checkForm()" class="btn btn-success btn-lg" id="done_button">
+                  Done
+                </a>
+              </div>
             </form>
           </div>
         </div>
       </div>
+    </div>
+    <script>
+      function checkForm() {
+        var name = document.getElementById('name').value;
+        var phone = document.getElementById('phone').value;
+        document.getElementById('formInfo').innerHTML = '';
+        if (name.length > 0 && phone.length > 9) {
+          if (isValidUkrainianNumber(phone))
+            document.userForm.submit();
+          else
+            document.getElementById('formInfo').innerHTML = '<div class="alert alert-danger"> Phone is not correct </div>';
+        } else {
+          document.getElementById('formInfo').innerHTML = '<div class="alert alert-danger"> All fields should be filled</div>';
+        }
+      }
+
+      function isValidUkrainianNumber(number) {
+        if (number.length == 13 && number.substr(0, 4) == "+380" && $.isNumeric(number.substr(1)))
+          return true;
+        else if (number.length == 10 && number.substr(0, 1) == "0" && $.isNumeric(number))
+          return true;
+        return false;
+      }
+    </script>
 <% end %>
