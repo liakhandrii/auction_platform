@@ -4,14 +4,12 @@ Rails.application.routes.draw do
   get "/500" => "errors#internal_server_error"
 
   get 'errors/not_found'
-
   get 'errors/internal_server_error'
-
   get 'index', to: "landing#index"
 
   resources :users
 
-  get 'get-bet', to: "bet#getBetByLotId"
+  get '/set-bet', to: "bet#updateBet"
 
   get 'login', to: "login#index"
   get 'info', to: "login#info"

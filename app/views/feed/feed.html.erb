@@ -150,6 +150,9 @@
       }
     }
 
+    .clickable {
+      outline: none;
+    }
 
   </style>
 </head>
@@ -233,8 +236,9 @@
                 <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40" onchange='$("#upload-file-info").html($(this).val());'>
               </a>
             </div>
-          </div><div class="col-lg-2">
-          <p class="hidden-xs glyphicon glyphicon-resize-horizontal" style="margin: 6px 51px 29px;"></p></div>
+          </div>
+          <div class="col-lg-2">
+            <p class="hidden-xs glyphicon glyphicon-resize-horizontal" style="margin: 6px 51px 29px;"></p></div>
           <div class="form-group col-lg-7">
             <div class="input-group hidden-xs ">
               <span class="input-group-addon glyphicon glyphicon-link" id="basic-addon1" style="top: 0px;"></span>
@@ -273,7 +277,7 @@
     <% @lots.each do |lot_photo| %>
         <div class="col-lg-3 col-sm-4 col-xs-6">
           <a title="Image 1" data-toggle="modal" data-target="#carouselModal">
-            <img class="thumbnail img-responsive" src="http://localhost:3000/<%= lot_photo.attachment %>">
+            <img class="thumbnail img-responsive" onclick="makeSlideActive(<%= lot_photo.id %>)" src="http://localhost:3000/<%= lot_photo.attachment %>">
           </a>
         </div>
     <% end %>
@@ -291,13 +295,51 @@
             </ol>
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
-              <div class="item active">
-              </div>
               <% @lots.each do |lot_photo| %>
-                  <div class="item">
+                  <div class="item" id="item_<%= lot_photo.id %>">
                     <img src="http://localhost:3000/<%= lot_photo.attachment %>" alt="<%= lot_photo.description %>">
-                    <input class="hidden" id="lot_id" value="<%= lot_photo.id %>"/>
-                    <div class="carousel-caption" id="user_id"><%= lot_photo.uid %></div>
+                    <div class="container">
+                      <div class="col-md-1">
+                        <div class="text-left">
+                          <span class="glyphicon glyphicon-heart-empty" style="font-size:3.5em; color: #e8e8e8;"></span>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <table>
+                          <tr>
+                            <td colspan="4">
+                              <span class="glyphicon glyphicon-minus-sign" style="font-size:3.5em; color: #EA4335"></span>
+                            </td>
+                            <td>
+                              <input type="text" class="form-control"
+                                     style="display: block; width: 87px; background-color:#d4d4d4; color: #FFF;"
+                                     id="confirmed_bet_<%= lot_photo.id %>"
+                                     value="<%= @bets.find_by(lot_id: lot_photo.id).confirmed_bet %>" disabled>
+                            </td>
+                            <td colspan="4">
+                              <a href="#" class="clickable">
+                              <span class="glyphicon glyphicon-plus-sign"
+                                    style="font-size:3.5em;color: #34A853"
+                                    onclick="raiseBet(<%= lot_photo.id%>)">
+                              </span>
+                              </a>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="alert alert-success">
+                          <% if @bets.find_by(lot_id: lot_photo.id).user_id %>
+                              <%= @users.find(@bets.find_by(lot_id: lot_photo.id).user_id).name %>
+                          <% else %>
+                              No bets
+                          <% end %>
+                        </div>
+                        <button class="btn btn-primary btn-lg" id="betConfirmBtn" onclick="getBet(<%=lot_photo.id%>)">
+                          Confirm bet
+                        </button>
+                      </div>
+                    </div>
                   </div>
               <% end %>
             </div>
@@ -311,38 +353,6 @@
               <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
               <span class="sr-only">Next</span>
             </a>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <div class="container">
-            <div class="col-md-1">
-              <div class="text-left">
-                <span class="glyphicon glyphicon-heart-empty" style="font-size:3.5em; color: #e8e8e8;"></span>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <table>
-                <tr>
-                  <td colspan="4">
-                    <span class="glyphicon glyphicon-minus-sign" style="font-size:3.5em; color: #EA4335"></span>
-                  </td>
-                  <td>
-                    <input type="text" class="form-control" style="display: block; width: 87px; background-color:#d4d4d4; color: #FFF;" id="confirmed_bet" disabled>
-                  </td>
-                  <td colspan="4">
-                    <span class="glyphicon glyphicon-plus-sign" style="font-size:3.5em;color: #34A853"></span>
-                  </td>
-                </tr>
-              </table>
-            </div>
-            <div class="col-md-6">
-              <div class="alert alert-success">
-                <strong>Success!</strong> Indicates a successful or positive action.
-              </div>
-              <button class="btn btn-primary btn-lg" id="betConfirmBtn" onclick="getBet()">
-                Confirm bet
-              </button>
-            </div>
           </div>
         </div>
       </div>
@@ -371,17 +381,28 @@
     $('#carouselModal').carousel({interval: false});
   });
 
-  function getBet() {
+  function getBet(lot_id) {
     var data = {
-      'user_id': document.getElementById('user_id').innerHTML ,
-      'lot_id': document.getElementById('lot_id').value,
-      'confirmed_bet': document.getElementById('confirmed_bet').value
+      'user_id': <%= current_user.id %>,
+      'lot_id': lot_id,
+      'confirmed_bet': document.getElementById('confirmed_bet_'+lot_id).value
     };
-    $.getJSON('/get-bet',
+    $.getJSON('/set-bet',
         data,
         function (data) {
 
         });
+  }
+
+  function makeSlideActive(id) {
+    <% @lots.each do |lot_photo| %>
+    $('#item_' +<%= lot_photo.id %>).removeClass('active');
+    <% end %>
+    $('#item_' + id).addClass('active');
+  }
+
+  function raiseBet(id) {
+    document.getElementById('confirmed_bet_' + id).value = (parseInt(document.getElementById('confirmed_bet_' + id).value) + 10);
   }
 </script>
 </body>

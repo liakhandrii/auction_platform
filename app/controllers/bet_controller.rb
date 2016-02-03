@@ -1,16 +1,19 @@
 class BetController < ApplicationController
 
-  def update_bet(lot_id, user_id, bet)
+  def updateBet
+    user_id = params[:user_id]
+    lot_id = params[:lot_id]
+    last_bet = params[:confirmed_bet]
+    @bet = Bet.find_by(lot_id: lot_id)
+    @bet.update_attribute(:lot_id, lot_id)
+    @bet.update_attribute(:user_id, user_id)
+    @bet.update_attribute(:confirmed_bet, last_bet)
 
+    if @bet.save!
+      render :json => {result: true}
+    else
+      render :json => {result: false}
+    end
   end
-
-  def getBetByLotId
-    puts params[:user_id]
-    puts params[:lot_id]
-    puts params[:confirmed_bet]
-    render :json => response
-  end
-
-
 
 end

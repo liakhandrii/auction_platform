@@ -1,5 +1,7 @@
 class FeedController < ApplicationController
 
+  before_action :lots, :bets, :users
+
   def feed
     if !current_user then
       redirect_to login_path
@@ -29,21 +31,35 @@ class FeedController < ApplicationController
         end
 
         if @lot.save!
+          createDefaultBet(@lot)
           redirect_to feed_path, notice: "The lot #{@lot.name} has been saved for moderation."
         else
           redirect_to feed_path, notice: "There was a problem saving the lot #{@lot.name}. Please check all the fields."
         end
+      else
+        redirect_to feed_path
       end
-      redirect_to feed_path
     end
   end
 
+  def createDefaultBet(lot)
+    @bet = Bet.create(lot_id: lot.id, confirmed_bet: 50)
+  end
+
   private
+
+  def bets
+    @bets = Bet.all
+  end
 
   def lots
     @lots = Lot.all
   end
 
-  helper_method :lots
+  def users
+    @users = User.all
+  end
+
+  helper_method :lots, :bets, :users
 
 end
