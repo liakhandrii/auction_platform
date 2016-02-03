@@ -314,7 +314,10 @@
                               <input type="text" class="form-control"
                                      style="display: block; width: 87px; background-color:#d4d4d4; color: #FFF;"
                                      id="confirmed_bet_<%= lot_photo.id %>"
-                                     value="<%= @bets.find_by(lot_id: lot_photo.id).confirmed_bet %>" disabled>
+                                     value="<%= @bet = @bets.find_by(lot_id: lot_photo.id) 
+                                     if @bet != nil then
+                                      @bet.confirmed_bet
+                                    end %>" disabled>
                             </td>
                             <td colspan="4">
                               <a href="#" class="clickable">
@@ -329,7 +332,8 @@
                       </div>
                       <div class="col-md-6">
                         <div class="alert alert-success">
-                          <% if @bets.find_by(lot_id: lot_photo.id).user_id %>
+                        <%= @bet = @bets.find_by(lot_id: lot_photo.id) %>
+                          <% if @bet != nil && @bet.user_id %>
                               <%= @users.find(@bets.find_by(lot_id: lot_photo.id).user_id).name %>
                           <% else %>
                               No bets

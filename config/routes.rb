@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get 'feed', to: "feed#feed"
   post 'upload', to: "feed#upload"
 
-  get 'info/update', to: "login#update_info"
+  post 'info/update', to: "login#update_info"
 
   get '/auth/:provider/callback', to: "sessions#create"
   delete 'sign_out',  to: "sessions#destroy", as: 'sign_out'
