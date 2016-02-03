@@ -1,37 +1,8 @@
+<%= stylesheet_link_tag 'jumbotron-narrow', media: 'all' %>
 <style type="text/css">
   body {
     background-color: #dddddd;
-  }
-
-  .center-block {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #fff;
-    border-radius: 5px;
-    border: none;
-    -webkit-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
-    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
-  }
-
-  #info_block {
-    margin-top: 10%;
-    width: 400px;
-    height: 450px;
-  }
-
-  #about_block {
-    width: auto;
-    height: 150px;
-    margin: 6%;
-    position: relative;
-    top: 5%;
-    border-radius: 3px;
-    background-color: #d9edf7;
-    border: 1px solid #bce8f1;
-  }
-
+  }  
   .about_text {
     color: #3a8bc5;
     margin: 5%;
@@ -47,19 +18,51 @@
   .input-group-btn > .glyphicon {
     top: 0px;
   }
-
-  #done_button {
-    width: 30%;
-    margin-top: 70px;
-    margin-left: 35%;
+  .text-center{
+    margin-top: 50px;
+  }
+  .alert{
+    margin-top: 15px;
+    padding-right: 35px;
+    padding-left: 35px;
+    margin-left: 70px;
+    margin-right: 70px;
+  }
+  .jumbotron{
+    background: rgba(255,255,255,0.8);
   }
 </style>
 <% if current_user %>
-    <div id="info_block" class="center-block">
-      <div class="text-center">
-        <%= image_tag(@auth['info']['image'], width: '100', height: '100', class: 'img-circle') %>
+    <!-- <div class="container center-block"> -->
+    <div class="container">
+      <div class="jumbotron">
+        <div class="text-center">
+          <%= image_tag(@auth['info']['image'], width: '100', height: '100', class: 'img-circle') %>
+          <div class="alert alert-info">
+              <h5><strong>Hey, <%= current_user.name %>!</strong> Here is the message specially for you.</h5>
+
+             <h5><strong>We just need a little but more information about you.</strong></h5>
+              <h5>Please, write down your true name and phone number.</h5>
+          </div>
+            <form action="info/update" method="post">
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon glyphicon glyphicon-user" id="basic-addon1" style="top: 0px;"></span>
+                  <input type="text" class="form-control" placeholder="Name" aria-describedby="basic-addon1" value="<%= current_user.name %>" name="name">
+              </div>
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon glyphicon glyphicon-earphone" id="basic-addon1" style="top: 0px;"></span>
+                 <input type="text" class="form-control" placeholder="Phone" aria-describedby="basic-addon1" name="phone">
+              </div>
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+            </form>
+            <div class="text-center">
+                <input type="submit" class="btn btn-success btn-lg" id="done_button" value="Done">
+            </div>
+          </div>
+        </div>
       </div>
-      <div id="about_block">
+
+      <!--<div id="alert alert-info">
         <h5 class="about_text"><strong>Hey, <%= current_user.name %>!</strong> Here is the message specially for you.
         </h5>
         <h5 class="about_text"><strong>We just need a little but more information about you.</strong></h5>
@@ -79,5 +82,5 @@
           <input type="submit" class="btn btn-success btn-lg" id="done_button" value="Done">
         </div>
       </form>
-    </div>
+    </div>-->
 <% end %>
