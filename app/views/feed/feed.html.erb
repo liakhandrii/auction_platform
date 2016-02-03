@@ -172,24 +172,8 @@
           <ul class="nav navbar-nav">
             <li id="teashers">
               <a href="#"><%= t('prof') %>  <span class="badge">67</span></a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" id="drTeachers">
-                <li class="drli" id="jj"><a tabindex="-1" href="#"><%= t('men') %></a></li>
-                <li class="drli"><a tabindex="-1" href="#"><%= t('women') %></a></li>
-              </ul>
-              <ul class="nav nav-tabs nav-stacked" id="mobileT">
-                <li class="drliM"><a tabindex="-1" href="#"><%= t('men') %></a></li>
-                <li class="drliM"><a tabindex="-1" href="#"><%= t('women') %></a></li>
-              </ul>
-            </li>
             <li id="students">
               <a href="#"><%= t('students') %>  <span class="badge">78</span></a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" id="drStudents">
-                <li class="drli"><a tabindex="-1" href="#"><%= t('boys') %></a></li>
-                <li class="drli"><a tabindex="-1" href="#"><%= t('girls') %></a></li>
-              </ul>
-              <ul class="nav nav-tabs nav-stacked" id="mobileS">
-                <li class="drliM"><a tabindex="-1" href="#"><%= t('boys') %></a></li>
-                <li class="drliM"><a tabindex="-1" href="#"><%= t('girls') %></a></li>
               </ul>
             </li>
           </ul>
@@ -385,6 +369,7 @@
     $('#carouselModal').carousel({interval: false});
   });
 
+  /*confiramation and valdation bet*/
   function getBet(lot_id) {
     var data = {
       'user_id': <%= current_user.id %>,
