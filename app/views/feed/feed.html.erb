@@ -231,7 +231,8 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-            <li  class="<%= "hidden" if @lots.find_by(uid: current_user.uid) != nil %>">
+            <li>
+            <!--<li  class="<%= "hidden" if @lots.find_by(uid: current_user.uid) != nil %>">-->
               <a href="#" data-toggle="modal" data-target="#uploadLot">
                 <span class="glyphicon glyphicon-cloud-upload" style="margin-left: 10px; margin-top: -10px;"></span>
                 <%= t('upload') %>
