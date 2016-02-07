@@ -150,10 +150,62 @@
       }
     }
 
-    .clickable {
-      outline: none;
+    .heart {
+      position: absolute;
+      top: -1000%;
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      -m-transform: rotate(-45deg);
+      transform: rotate(-45deg)
     }
 
+    .heart:before {
+      position: absolute;
+      top: -50%;
+      left: 0;
+      display: block;
+      content: "";
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      border-radius: 100%;
+    }
+
+    .heart:after {
+      position: absolute;
+      top: 0;
+      right: -50%;
+      display: block;
+      content: "";
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      border-radius: 100%;
+    }
+
+    @-webkit-keyframes love {
+      0% {
+        top: 110%
+      }
+    }
+
+    @-moz-keyframes love {
+      0% {
+        top: 110%
+      }
+    }
+
+    @-ms-keyframes love {
+      0% {
+        top: 110%
+      }
+    }
+
+    @keyframes love {
+      0% {
+        top: 110%
+      }
+    }
   </style>
 </head>
 <body>
@@ -238,7 +290,7 @@
             </div>
           </div>
           <div class="col-lg-2">
-            <p class="hidden-xs glyphicon" style="margin: 6px 51px 29px;"><%= t('or')%></p></div>
+            <p class="hidden-xs glyphicon" style="margin: 6px 51px 29px;"><%= t('or') %></p></div>
           <div class="form-group col-lg-7">
             <div class="input-group hidden-xs ">
               <span class="input-group-addon glyphicon glyphicon-link" id="basic-addon1" style="top: 0px;"></span>
@@ -277,7 +329,7 @@
     <% @lots.each do |lot_photo| %>
         <div class="col-lg-3 col-sm-4 col-xs-6">
           <a title="Image 1" data-toggle="modal" data-target="#carouselModal">
-            <img class="thumbnail img-responsive" onclick="makeSlideActive(<%= lot_photo.id %>)" src="http://localhost:3000/<%= lot_photo.attachment %>">
+            <img class="thumbnail img-responsive" onclick="makeSlideActive(<%= lot_photo.id %>)" src="http://localhost:3000<%= lot_photo.attachment %>">
           </a>
         </div>
     <% end %>
@@ -287,61 +339,66 @@
       <div class="modal-content">
         <div class="modal-body">
           <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-              <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-              <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-              <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-            </ol>
-            <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
               <% @lots.each do |lot_photo| %>
                   <div class="item" id="item_<%= lot_photo.id %>">
                     <img src="http://localhost:3000/<%= lot_photo.attachment %>" alt="<%= lot_photo.description %>">
-                    <div class="container">
-                      <div class="col-md-1">
-                        <div class="text-left">
-                          <span class="glyphicon glyphicon-heart-empty" style="font-size:3.5em; color: #e8e8e8;"></span>
+                    <div class="row" style="margin-top:20px;">
+                      <div class="container-fluid">
+                        <div class="col-md-2">
+                            <span class="glyphicon glyphicon-heart-empty"
+                                  style="font-size:3.5em; color: #EA4335;"
+                                  id="heart_<%= lot_photo.id %>"
+                                  onclick="drawHeart(<%= lot_photo.id %>)">
+                              <div id="bg_heart_<%= lot_photo.id %>"></div>
+                            </span>
                         </div>
-                      </div>
-                      <div class="col-md-4">
-                        <table>
-                          <tr>
-                            <td colspan="4">
-                              <span class="glyphicon glyphicon-minus-sign" style="font-size:3.5em; color: #EA4335"></span>
-                            </td>
-                            <td>
-                              <input type="text" class="form-control"
-                                     style="display: block; width: 87px; background-color:#d4d4d4; color: #FFF;"
-                                     id="confirmed_bet_<%= lot_photo.id %>"
-                                     value="<%= @bet = @bets.find_by(lot_id: lot_photo.id) 
-                                     if @bet != nil then
-                                      @bet.confirmed_bet
-                                    end %>" disabled>
-                            </td>
-                            <td colspan="4">
-                              <a href="#" class="clickable">
-                              <span class="glyphicon glyphicon-plus-sign"
+                        <div class="col-md-5">
+                          <table>
+                            <tr>
+                              <td colspan="4">
+                                <span class="glyphicon glyphicon-minus-sign"
+                                      style="font-size:3.5em; color: #EA4335"
+                                      onclick="downgradeBet(<%= lot_photo.id%>, <%= @bets.find_by(lot_id: lot_photo.id).confirmed_bet %>)">
+                                </span>
+                              </td>
+                              <td>
+                                <input type="text" class="form-control"
+                                       style="display: block; width: 77px; background-color:#ababab; color: #FFFFFF;"
+                                       id="confirmed_bet_<%= lot_photo.id %>"
+                                       value="<%= @bet = @bets.find_by(lot_id: lot_photo.id)
+                                                  if @bet != nil then
+                                                    @bet.confirmed_bet
+                                                  end %>" disabled>
+                              </td>
+                              <td colspan="5">
+                                <span class="glyphicon glyphicon-plus-sign"
                                     style="font-size:3.5em;color: #34A853"
-                                    onclick="raiseBet(<%= lot_photo.id%>)">
-                              </span>
-                              </a>
-                            </td>
-                          </tr>
-                        </table>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="alert alert-success">
-                        <%= @bet = @bets.find_by(lot_id: lot_photo.id) 
-                           if @bet != nil && @bet.user_id 
-                               @users.find(@bets.find_by(lot_id: lot_photo.id).user_id).name 
-                           else 
-                               t('no_bets')
-                           end %>
+                                    onclick="raiseBet(<%= lot_photo.id%>, <%= @bets.find_by(lot_id: lot_photo.id).confirmed_bet %>)">
+                                </span>
+                              </td>
+                            </tr>
+                          </table>
                         </div>
-                        <button class="btn btn-primary btn-lg" id="betConfirmBtn" onclick="getBet(<%=lot_photo.id%>)">
-                          <%= t('confirm_bet') %>
-                        </button>
+                        <div class="col-md-5">
+                          <div class="alert alert-info" id="last_bet_name_<%= lot_photo.id %>">
+                            <bold>Last bet:</bold>
+                            <%= @bet = @bets.find_by(lot_id: lot_photo.id)
+                                if @bet != nil && @bet.user_id
+                                  @users.find(@bets.find_by(lot_id: lot_photo.id).user_id).name
+                                else
+                                  t('no_bets')
+                                end %>
+                          </div>
+                          <div class="hide" id="change_bet_name_<%= lot_photo.id %>">
+                            <div class="alert alert-warning">
+                              <%= current_user.name %>
+                            </div>
+                            <button class="btn btn-primary" id="betConfirmBtn" onclick="setBet(<%=lot_photo.id%>)">
+                              <%= t('confirm_bet') %>
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -349,26 +406,26 @@
             </div>
 
             <!-- Controls -->
-            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <a class="left carousel-control" style="margin-bottom: 20%;" href="#carousel-example-generic" role="button" data-slide="prev">
               <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
               <span class="sr-only"><%= t('previous_lot') %></span>
             </a>
-            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <a class="right carousel-control" style="margin-bottom: 20%;" href="#carousel-example-generic" role="button" data-slide="next">
               <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
               <span class="sr-only"><%= t('next_lot') %></span>
             </a>
           </div>
+
         </div>
       </div>
     </div>
   </div>
 </div>
 
-
-
 <%= flash[:notice] %>
 
 <script type="text/javascript">
+
   $(document).ready(function () {
     var success = true;
     $('#addPhoto').click(function () {
@@ -385,16 +442,19 @@
     $('#carouselModal').carousel({interval: false});
   });
 
-  function getBet(lot_id) {
+  function setBet(lot_id) {
     var data = {
       'user_id': <%= current_user.id %>,
       'lot_id': lot_id,
-      'confirmed_bet': document.getElementById('confirmed_bet_'+lot_id).value
+      'confirmed_bet': document.getElementById('confirmed_bet_' + lot_id).value
     };
     $.getJSON('/set-bet',
         data,
         function (data) {
-
+          if (data.result)
+            document.getElementById('last_bet_name_' + lot_id).innerHTML = '<%= current_user.name %>';
+          $('#change_bet_name_' + lot_id).hide();
+          $('#last_bet_name_' + lot_id).fadeIn('slow');
         });
   }
 
@@ -405,9 +465,51 @@
     $('#item_' + id).addClass('active');
   }
 
-  function raiseBet(id) {
-    document.getElementById('confirmed_bet_' + id).value = (parseInt(document.getElementById('confirmed_bet_' + id).value) + 10);
+  function raiseBet(id, limit) {
+    var futureValue = (parseInt(document.getElementById('confirmed_bet_' + id).value) + 10);
+    if (futureValue > limit) {
+      $('#last_bet_name_' + id).hide();
+      $('#change_bet_name_' + id).fadeIn('slow');
+      $('#change_bet_name_' + id).removeClass('hide');
+    }
+    document.getElementById('confirmed_bet_' + id).value = futureValue;
   }
+
+  function downgradeBet(id, limit) {
+    if (document.getElementById('confirmed_bet_' + id).value > limit)
+      document.getElementById('confirmed_bet_' + id).value = (parseInt(document.getElementById('confirmed_bet_' + id).value) - 10);
+    if (document.getElementById('confirmed_bet_' + id).value == limit) {
+      $('#change_bet_name_' + id).hide();
+      $('#last_bet_name_' + id).fadeIn('slow');
+    }
+  }
+
+
+  function drawHeart(id) {
+
+    var r_num = Math.floor(Math.random() * 100) + 1;
+    var r_size = Math.floor(Math.random() * 30) + 10;
+    var r_left = Math.floor(Math.random() * 100) + 1;
+    var r_bg = Math.floor(Math.random() * 25) + 100;
+    var r_time = 3;
+
+    $('#bg_heart_' + id)
+    $('#bg_heart_' + id).append("<div class='heart' style='width:" + r_size + "px;height:" + r_size + "px;left:" + r_left + "%;background:rgba(255," + (r_bg - 25) + "," + r_bg + ",1);-webkit-animation:love " + r_time + "s ease;-moz-animation:love " + r_time + "s ease;-ms-animation:love " + r_time + "s ease;animation:love " + r_time + "s ease'></div>");
+
+    $('#bg_heart_' + id).append("<div class='heart' style='width:" + (r_size - 10) + "px;height:" + (r_size - 100) + "px;left:" + (r_left + r_num) + "%;background:rgba(255," + (r_bg - 25) + "," + (r_bg + 25) + ",1);-webkit-animation:love " + (r_time + 5) + "s ease;-moz-animation:love " + (r_time + 5) + "s ease;-ms-animation:love " + (r_time + 5) + "s ease;animation:love " + (r_time + 5) + "s ease'></div>");
+  }
+
+  var love = setInterval(function () {
+
+    $('.heart').each(function () {
+      var top = $(this).css("top").replace(/[^-\d\.]/g, '');
+      var width = $(this).css("width").replace(/[^-\d\.]/g, '');
+      if (top <= -300 || width >= 150) {
+        $(this).detach();
+      }
+    });
+  }, 500);
+
 </script>
 </body>
 </html>
