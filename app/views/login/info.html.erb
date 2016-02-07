@@ -79,9 +79,9 @@
           if (isValidUkrainianNumber(phone))
             document.userForm.submit();
           else
-            document.getElementById('formInfo').innerHTML = '<div class="alert alert-danger"> Phone is not correct </div>';
+            document.getElementById('formInfo').innerHTML = '<div class="alert alert-danger"> <strong><%= t('bad_phone')%></strong></div>';
         } else {
-          document.getElementById('formInfo').innerHTML = '<div class="alert alert-danger"> All fields should be filled</div>';
+          document.getElementById('formInfo').innerHTML = '<div class="alert alert-danger"><strong> <%= t('bad_alert')%></strong></div>';
         }
       }
 

@@ -21,8 +21,38 @@
     #white{
       color: white;
     }
+    #img-o{
+      margin-bottom: 3px;
+    }
     .jumbotron{
       background: url("<%= image_url("cover.jpg") %>");
+    }
+    .counter {      
+      text-align: center;
+    }
+
+    .counter h3 {
+      font-family: 'Open Sans', sans-serif;
+      font-weight:900;
+      color:#fff;
+    }
+
+    #countdown {
+      color: #FFFFFF;
+    }
+
+    #countdown span {
+      color:#D73B65;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 26px;
+      font-weight:900;
+      margin-left: 10px;
+      margin-right: 10px;
+      text-align: center;
+    }
+
+    #countdown b{
+      color: #FFFFFF;
     }
     </style>
 
@@ -32,14 +62,18 @@
         <h1 id="white">БЛАГОДІЙНИЙ</h1>
         <h2 id="white">АУКЦІОН ПОБАЧЕНЬ</h2>
         <h1 id="numbers">12.02 &nbsp; &nbsp; &nbsp; &nbsp; 18:00</h1>
-        <p id="fix"><a class="btn btn-lg btn-success" href="login" role="button">Увійти</a></p>
+        <div class="counter">
+          <h3>До запуску платформи залишилось:</h3>
+          <div id="countdown"></div>
+        </div>
+        <p id="fix"><a class="btn btn-lg btn-success disabled" href="login" role="button">Увійти</a></p>
       </div>
 
       <div class="row marketing">
-      <div class="col-lg-3">
+      <div class="col-lg-3 col-md-3 col-xs-4" id="#img-o">
         <%= image_tag("oleksij.png", class: "img-circle") %>
       </div>
-        <div class="col-lg-9">
+        <div class="col-lg-9 col-md-9 col-xs-8">
           <p><b><mark>Благодійний аукціон побачень 16’</mark></b> – присвячений збору коштів
 для <b>Самокиші Олексія Петровича</b>, студента Києво-Могилянської академії,
 що в данний момент бореться зі страшною хворобою – рак печінки.</p>
@@ -48,7 +82,7 @@
           <p>Також можна пожертвувати кошти на лікування натиснуваши кнопку</p>
         </div>
       </div>
-      <div class="text-center">
+      <div class="text-center text-xs-left">
           <p><a class="btn btn-lg btn-warning" href="http://saveolexiy.com/en/" role="button">Donate</a></p>
         </div>
       <footer class="footer">
@@ -56,3 +90,38 @@
       </footer>
 
     </div> <!-- /container -->
+
+    <script>
+
+    var target_date = new Date('Feb, 4, 2016').getTime();
+ 
+    // variables for time units
+    var days, hours, minutes, seconds;
+     
+    // get tag element
+    var countdown = document.getElementById('countdown');
+     
+    // update the tag with id "countdown" every 1 second
+    setInterval(function () {
+     
+        // find the amount of "seconds" between now and target
+        var current_date = new Date().getTime();
+        var seconds_left = (target_date - current_date) / 1000;
+     
+        // do some time calculations
+        //days = parseInt(seconds_left / 86400);
+        //seconds_left = seconds_left % 86400;
+         
+        hours = parseInt(seconds_left / 3600);
+        seconds_left = seconds_left % 3600;
+         
+        minutes = parseInt(seconds_left / 60);
+        seconds = parseInt(seconds_left % 60);
+         
+        // format countdown string + set tag value
+        countdown.innerHTML = '<span class="hours">' + hours + ' Годин</span> <span class="minutes">'
+        + minutes + ' Хвилин</span> <span class="seconds">' + seconds + ' Секунд</span>';  
+     
+    }, 1000);
+
+    </script>
